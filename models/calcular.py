@@ -3,7 +3,7 @@ from random import randint
 
 class Calcular:
 
-    def __init__(self: object, dificuldade: int) -> None:
+    def __init__(self: object, dificuldade: int, /) -> None:
         self.__dificuldade: int = dificuldade
         self.__valor1: int = self._gerar_valor
         self.__valor2: int = self._gerar_valor
@@ -44,15 +44,44 @@ class Calcular:
 
     @property
     def _gerar_valor(self: object) -> int:
-        pass
+        if self.dificuldade == 1:
+            return randint(0, 10)
+        elif self.dificuldade == 2:
+            return randint(0, 100)
+        elif self.dificuldade == 3:
+            return randint(0, 1000)
+        else:
+            print('Valor invalido, a difuculdade só pode ser 1, 2 ou 3.')
 
     @property
     def _gerar_resultado(self: object) -> int:
-        pass
+        if self.operacao == 1:
+            return self.valor1 + self.valor2
+        elif self.operacao == 2:
+            return self.valor1 - self.valor2
+        else:
+            return self.valor1 * self.valor2
+
+    @property
+    def _op_simbolo(self: object) -> str:
+        if self.operacao == 1:
+            return '+'
+        elif self.operacao == 2:
+            return '-'
+        else:
+            return '*'
 
     def checar_resultado(self: object, resposta: int) -> bool:
-        pass
+        certo: bool = False
+
+        if self.resultado == resposta:
+            print('Resposta correta!')
+            certo = True
+        else:
+            print('Resposta incorreta!')
+        print(f'{self.valor1} {self._op_simbolo} {self.valor2} = {self.resultado}')
+        return certo
 
     def mostrar_operacao(self: object) -> None:
-        pass
+        print(f'{self.valor1} {self._op_simbolo} {self.valor2} = ?')
 
